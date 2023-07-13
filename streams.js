@@ -11,7 +11,8 @@ readStream.on('data', (chunk) => {
     writeStream.write(chunk);
 });
 
-
+//piping - Reading and Writing - This is doing the same as WriteStream
+readStream.pipe(writeStream);
 
 //ReadStream
 readStream.on('data', (chunk) => {
