@@ -1,0 +1,20 @@
+Embark on a rewarding journey in the healthcare industry and leverage your technical skills to transform patient care. As a Medior .NET Developer, you will be at the forefront of innovation, collaborating with industry professionals to develop cutting-edge healthcare applications. Join a passionate team ensure compliance with data privacy regulations and make a lasting impact.
+Responsibilities
+Developing and maintaining groundbreaking healthcare applications using .NET frameworks, such as .NET Core.
+Crafting clean, efficient code and conducting thorough testing to guarantee exceptional quality.
+Active participation in code reviews, providing valuable feedback to teammates.
+Ensuring adherence to healthcare data standards and privacy regulations.
+
+Requirements
+Strong experience in .NET development, including proficiency in .NET Core.
+Experienced working with Azure.
+Proficiency in C#, ASP.NET, and MVC.
+Hands-on experience with APIs and integrations.
+
+Benefits
+Up to €70.000 per year plus benefits.
+Opportunity for professional growth and career advancement.
+Convenient location in Amsterdam.
+Hybrid working.
+
+If you are ready to take your career to the next level, we would love to hear from you! Don't miss out on this opportunity. Looking forward to hearing from you, please contact me at D.gomez@masonfrank.com, https://www.linkedin.com/in/dgomezrios16/, +31 639317366 to discuss this opportunity or other opportunities within the .Net ecosystem in the Netherlands.
