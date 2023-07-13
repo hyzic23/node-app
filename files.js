@@ -2,17 +2,17 @@ const { error } = require('console');
 const fs = require('fs');
 
 //reading files
-// fs.readFile('./docs/blog1.txt', (error, data) => {
-//     if(error){
-//         console.log(error);
-//     }
-//         console.log(data.toString());
-// });
+fs.readFile('./docs/blog1.txt', (error, data) => {
+    if(error){
+        console.log(error);
+    }
+        console.log(data.toString());
+});
 
 //Writing files
-// fs.writeFile('./docs/blog1.txt', 'Hello, World', () => {
-//     console.log('File was written');
-// });
+fs.writeFile('./docs/blog1.txt', 'Hello, World', () => {
+    console.log('File was written');
+});
 
 
 //directories
