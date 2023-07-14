@@ -10,6 +10,9 @@ app.set('view engine', 'ejs');
 //Listen for request
 app.listen(3000);
 
+// middleware and static file
+app.use(express.static('public'));
+
 app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
