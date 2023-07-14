@@ -6,10 +6,10 @@ const server = http.createServer((req, res) => {
     
     // lodash
     const num = _.random(0, 20);
-    console.log(num);
+    console.log('Random number generated is ', num);
 
     const greet = _.once(() => {
-        console.log('Hello');
+        console.log('Hello World');
     });
 
     greet();
@@ -26,7 +26,7 @@ const server = http.createServer((req, res) => {
                 path += 'about.html';
                 res.statusCode = 200;
                 break;
-            case '/about-us':
+            case '/about-me':
                 res.setHeader('Location', '/about');
                 res.statusCode = 301;
                 res.end();
