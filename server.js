@@ -5,9 +5,11 @@ const _ = require('lodash');
 const server = http.createServer((req, res) => {
     
     // lodash
+    // This generated Random Number
     const num = _.random(0, 20);
     console.log('Random number generated is ', num);
 
+    // Prints greet once
     const greet = _.once(() => {
         console.log('Hello World');
     });
