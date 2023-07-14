@@ -1,4 +1,5 @@
 const express = require('express');
+var morgan = require('morgan')
 
 // express app
 const app = express();
@@ -8,6 +9,8 @@ app.set('view engine', 'ejs');
 
 //Listen for request
 app.listen(3000);
+
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
 
