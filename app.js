@@ -1,21 +1,17 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-
 const blogRoutes = require('./routes/blogRoutes');
-
-const { result } = require('lodash');
-const { render } = require('ejs');
 
 // express app
 const app = express();
 
 // connect to mongoDb database
 const dbURI = 'mongodb+srv://sa:localdb23@node-cluster.i6lttna.mongodb.net/node-tut?retryWrites=true&w=majority';
+
 mongoose.connect(dbURI)
         .then((res) => app.listen(3000))
         .catch((err) => console.log(err));
-//mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true});
 
 // register view engine
 app.set('view engine', 'ejs');
