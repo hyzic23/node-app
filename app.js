@@ -3,6 +3,11 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRoutes');
 
+const jsonwebtoken = require('jsonwebtoken');
+
+// The SecretKey 
+const JWT_SECRET = 'goK!123Aszx';
+
 // express app
 const app = express();
 
