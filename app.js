@@ -22,6 +22,10 @@ mongoose.connect(process.env.MONGO)
         .then((res) => app.listen(3000))
         .catch((err) => console.log(err));
 
+mongoose.connection.on('disconnected', () => {
+    console.log('mongoDB disconnected!!!');
+})
+
 // This helps the application to accept json datatype
 app.use(express.json());
 
