@@ -25,14 +25,21 @@ const blog_create_get = (req, res) => {
 }
 
 const blog_create_post = (req, res) => {
-    const blog = new Blog(req.body);
-
-    blog.save().then((result) => {
+    //const blog = new Blog(req.body);
+    const blog = Blog.create(req.body)
+    .then((result) => {
         res.redirect('/blogs');
     })
     .catch((err) => { 
         console.log(err);
     });
+
+    // blog.save().then((result) => {
+    //     res.redirect('/blogs');
+    // })
+    // .catch((err) => { 
+    //     console.log(err);
+    // });
 }
 
 const blog_delete = (req, res) => {

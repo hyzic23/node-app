@@ -18,6 +18,9 @@ mongoose.connect(dbURI)
         .then((res) => app.listen(3000))
         .catch((err) => console.log(err));
 
+// This helps the application to accept json datatype
+app.use(express.json());
+
 // register view engine
 app.set('view engine', 'ejs');
 
