@@ -1,7 +1,11 @@
+//import dotenv from 'dotenv'
+
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRoutes');
+const dotenv = require('dotenv').config();
+//dotenv.config();
 
 const jsonwebtoken = require('jsonwebtoken');
 
@@ -12,9 +16,9 @@ const JWT_SECRET = 'goK!123Aszx';
 const app = express();
 
 // connect to mongoDb database
-const dbURI = 'mongodb+srv://sa:localdb23@node-cluster.i6lttna.mongodb.net/node-tut?retryWrites=true&w=majority';
-
-mongoose.connect(dbURI)
+//const dbURI = 'mongodb+srv://sa:localdb23@node-cluster.i6lttna.mongodb.net/node-tut?retryWrites=true&w=majority';
+console.log(process.env.MONGO);
+mongoose.connect(process.env.MONGO)
         .then((res) => app.listen(3000))
         .catch((err) => console.log(err));
 
