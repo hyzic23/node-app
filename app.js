@@ -9,6 +9,7 @@ const dotenv = require('dotenv').config();
 //dotenv.config();
 
 const jsonwebtoken = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 
 // The SecretKey 
 const JWT_SECRET = 'goK!123Aszx';
@@ -26,6 +27,7 @@ mongoose.connection.on('disconnected', () => {
     console.log('mongoDB disconnected!!!');
 })
 
+app.use(cookieParser);
 // This helps the application to accept json datatype
 app.use(express.json());
 
