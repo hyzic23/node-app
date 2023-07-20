@@ -12,7 +12,7 @@ const jsonwebtoken = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 
 // The SecretKey 
-const JWT_SECRET = 'goK!123Aszx';
+//const JWT_SECRET = 'goK!123Aszx';
 
 // express app
 const app = express();
