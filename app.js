@@ -6,7 +6,6 @@ const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const dotenv = require('dotenv').config();
 
-//dotenv.config();
 
 //const jsonwebtoken = require('jsonwebtoken');
 //const cookieParser = require('cookie-parser');
@@ -23,8 +22,7 @@ const app = express();
 app.use(express.json());
 
 // connect to mongoDb database
-const dbURI = 'mongodb+srv://sa:localdb23@node-cluster.i6lttna.mongodb.net/node-tut?retryWrites=true&w=majority';
-
+//const dbURI = 'mongodb+srv://sa:localdb23@node-cluster.i6lttna.mongodb.net/node-tut?retryWrites=true&w=majority';
 // mongoose.connect(dbURI);
 // const connection = mongoose.connection;
 // connection.once('open', function(){
@@ -33,15 +31,18 @@ const dbURI = 'mongodb+srv://sa:localdb23@node-cluster.i6lttna.mongodb.net/node-
 
 
 mongoose.connect(process.env.MONGO)
-        .then((res) => app.listen(4000))
+        .then((res) => {
+            console.log('MongoDB database connection established successfully');
+            console.log(`Running on Port ${process.env.PORT}`)
+            app.listen(process.env.PORT)
+        })
         .catch((err) => console.log(err));
 
 mongoose.connection.on('disconnected', () => {
     console.log('mongoDB disconnected!!!');
 })
 
-const PORT = 4000;
-
+//const PORT = 4000;
 // app.listen(PORT, () => {
 //     console.log('Listening to ', PORT);
 // })
