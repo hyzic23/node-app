@@ -1,4 +1,3 @@
-
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
@@ -6,10 +5,11 @@ const blogRoutes = require('./routes/blogRoutes');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const dotenv = require('dotenv').config();
+
 //dotenv.config();
 
-const jsonwebtoken = require('jsonwebtoken');
-const cookieParser = require('cookie-parser');
+//const jsonwebtoken = require('jsonwebtoken');
+//const cookieParser = require('cookie-parser');
 
 // The SecretKey 
 //const JWT_SECRET = 'goK!123Aszx';
@@ -17,19 +17,47 @@ const cookieParser = require('cookie-parser');
 // express app
 const app = express();
 
-// connect to mongoDb database
-//const dbURI = 'mongodb+srv://sa:localdb23@node-cluster.i6lttna.mongodb.net/node-tut?retryWrites=true&w=majority';
-mongoose.connect(process.env.MONGO)
-        .then((res) => app.listen(3000))
-        .catch((err) => console.log(err));
 
-mongoose.connection.on('disconnected', () => {
-    console.log('mongoDB disconnected!!!');
-})
-
-app.use(cookieParser);
+//app.use(cookieParser);
 // This helps the application to accept json datatype
 app.use(express.json());
+
+// connect to mongoDb database
+const dbURI = 'mongodb+srv://sa:localdb23@node-cluster.i6lttna.mongodb.net/node-tut?retryWrites=true&w=majority';
+mongoose.connect(dbURI);
+const connection = mongoose.connection;
+connection.once('open', function(){
+    console.log('MongoDB database connection established successfully');
+})
+const PORT = 4000;
+
+app.listen(PORT, () => {
+    console.log('Listening to ', PORT);
+})
+
+// mongoose.connect(process.env.MONGO)
+//         .then((res) => app.listen(3030))
+//         .catch((err) => console.log(err));
+
+// mongoose.connection.on('disconnected', () => {
+//     console.log('mongoDB disconnected!!!');
+// })
+
+app.use('/api/demo', (req, res) => {
+    console.log('Demo API')
+    res.status(200).json({message: 'Called Demo API'})
+});
+
+app.get('/api/auth/dummy', (req, res) => {
+    console.log('Hey!!!')
+    res.status(200).json({message: 'Called Dummy API'})
+}
+);
+
+app.use('/api/auth', authRoutes);
+
+
+
 
 // register view engine
 app.set('view engine', 'ejs');
@@ -52,7 +80,9 @@ app.get('/about', (req, res) => {
 //blog routes
 app.use('/blogs', blogRoutes);
 app.use('/api/user', userRoutes);
-app.use('/api/auth', authRoutes);
+//app.use('/api/auth', authRoutes);
+
+
 
 // 404 Page
 app.use((req, res) => {

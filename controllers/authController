@@ -1,14 +1,21 @@
 const createError =  require('../utils/error');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+//const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config();
+const { validationResult} = require('express-validator');
 
 const register = async (req, res, next) => {
     console.log('Inside Register');
-    if(!req.body.username && !req.body.password && !req.body.email)
-        return res.status(400).json({message: 'Username or Password or Email cannot be empty!'});
     try {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json({
+                success: false,
+                errors: errors.array()
+            });
+        }
+
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
 
@@ -27,10 +34,6 @@ const register = async (req, res, next) => {
 }
 
 const login = async (req, res, next) => {
-    console.log('Inside login');
-    res.status(200).json({message: 'Called Login API'});
-    if(!req.body.username && !req.body.password)
-        return res.status(400).json({message: 'Username or Password cannot be empty!'});
     try {
         const user = await User.findOne({username: req.body.username});
         if(!user) return next(createError(404, 'User not found'))
@@ -38,15 +41,17 @@ const login = async (req, res, next) => {
         const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password)
         if(!isPasswordCorrect) 
             return next(createError(400, 'Wrong password or username'));
+        
+        res.status(200).json({message : 'Login Successful', user});
 
-        const token = jwt.sign({id: user._id, isAdmin: user.isAdmin}, 
-            'n/y1HzjLXD8Wzoen21E7G8fa0fFEbx2Rlfg6nO/CqXg=');
+        //const token = jwt.sign({id: user._id, isAdmin: user.isAdmin}, 
+            //'n/y1HzjLXD8Wzoen21E7G8fa0fFEbx2Rlfg6nO/CqXg=');
        
         //This will remove Password and isAdmin as part of the response
-        const { password, isAdmin, ...otherDetails} = user._doc;
-        res.cookie('access_token', token, { httpOnly: true,})
-            .status(200)
-            .json({...otherDetails});
+        //const { password, isAdmin, ...otherDetails} = user._doc;
+        //res.cookie('access_token', token, { httpOnly: true,})
+            //.status(200)
+            //.json({...otherDetails});
     } catch (error) {
         console.log(error)
         next(error)
@@ -72,6 +77,7 @@ const dummyApi = async (req, res) => {
 module.exports = {
     register,
     login,
-    dummyApi
+    dummyApi,
+    desire
 }
 
