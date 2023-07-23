@@ -6,7 +6,8 @@ const dotenv = require('dotenv').config();
 const { validationResult} = require('express-validator');
 
 const register = async (req, res, next) => {
-    console.log('Inside Register');
+   const emailExist = User.findOne({email: req.body.email});
+   if(emailExist) return res.status(400).json({message: 'Email already exists'});
     try {
         const errors = validationResult(req);
         if(!errors.isEmpty()){

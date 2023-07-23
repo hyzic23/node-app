@@ -33,7 +33,7 @@ app.use(express.json());
 mongoose.connect(process.env.DB_CONNECTION)
         .then((res) => {
             console.log('MongoDB database connection established successfully');
-            console.log(`Running on Port ${process.env.PORT}`)
+            console.log(`Server up and running on Port ${process.env.PORT}`)
             app.listen(process.env.PORT)
         })
         .catch((err) => console.log(err));
