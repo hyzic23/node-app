@@ -1,7 +1,7 @@
 const createError =  require('../utils/error');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
-//const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config();
 const { validationResult} = require('express-validator');
 
@@ -36,6 +36,16 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
     try {
+
+        //VALIDATE USER DATA FOR LOGIN
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json({
+                success: false,
+                errors: errors.array()
+            });
+        }
+        
         const user = await User.findOne({username: req.body.username});
         if(!user) return next(createError(404, 'User not found'))
 
@@ -43,7 +53,13 @@ const login = async (req, res, next) => {
         if(!isPasswordCorrect) 
             return next(createError(400, 'Wrong password or username'));
         
-        res.status(200).json({message : 'Login Successful', user});
+        //CREATE AND ASSIGN A TOKEN
+        const token = jwt.sign({_id: user._id }, process.env.JWT_SECRET);
+        res.header('auth-token', token).json({token: token});
+
+        //res.status(200).json({message : 'Login Successful', user});
+
+
 
         //const token = jwt.sign({id: user._id, isAdmin: user.isAdmin}, 
             //'n/y1HzjLXD8Wzoen21E7G8fa0fFEbx2Rlfg6nO/CqXg=');
