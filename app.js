@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRoutes');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 
 
 //const jsonwebtoken = require('jsonwebtoken');
@@ -30,7 +30,7 @@ app.use(express.json());
 // })
 
 
-mongoose.connect(process.env.MONGO)
+mongoose.connect(process.env.DB_CONNECTION)
         .then((res) => {
             console.log('MongoDB database connection established successfully');
             console.log(`Running on Port ${process.env.PORT}`)

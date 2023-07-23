@@ -9,5 +9,18 @@
     "lodash": "^4.17.21",
     "mongoose": "^7.4.0",
     "morgan": "^1.10.0"
-  }
+  },
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "name": "app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

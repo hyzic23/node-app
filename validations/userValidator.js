@@ -16,7 +16,7 @@ validateUser = [
     .isLength({min: 3, max: 20})
     .withMessage('Password length should be minimum of 3 and maximum of 20')
     .matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$/)
-    .withMessage('Must have atleast 1 uppercase, 1 lowercase letter and 1 number')
+    .withMessage('Must have at least 1 uppercase, 1 lowercase letter and 1 number')
     .custom((value) => {
         if(value.length < 8){
             return Promise.reject('Password length must be greater than 8');
