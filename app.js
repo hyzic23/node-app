@@ -5,29 +5,63 @@ const blogRoutes = require('./routes/blogRoutes');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 require('dotenv').config();
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
-
-//const jsonwebtoken = require('jsonwebtoken');
-//const cookieParser = require('cookie-parser');
-
-// The SecretKey 
-//const JWT_SECRET = 'goK!123Aszx';
 
 // express app
 const app = express();
 
-
-//app.use(cookieParser);
 // This helps the application to accept json datatype
 app.use(express.json());
 
-// connect to mongoDb database
-//const dbURI = 'mongodb+srv://sa:localdb23@node-cluster.i6lttna.mongodb.net/node-tut?retryWrites=true&w=majority';
-// mongoose.connect(dbURI);
-// const connection = mongoose.connection;
-// connection.once('open', function(){
-//     console.log('MongoDB database connection established successfully');
-// })
+// const swaggerOption = {
+//     swaggerDefinitions: {
+//         info: {
+//             title: "NodeApp API",
+//             description: "NodeApp API Information to Register, login and Generate Token",
+//             contact: {
+//                 name: "Isaac Onoks"
+//             },
+//             servers: ["http://localhost:4000"]
+//         }
+//     },
+//     //api:["app.js"]
+//     api:["./routes/authRoutes.js"]
+// };
+
+const swaggerDefinition = {
+    openapi: '3.0.0',
+    info: {
+      title: 'Express API for JSONPlaceholder',
+      version: '1.0.0',
+    },
+  };
+
+  const options = {
+    swaggerDefinition,
+    // Paths to files containing OpenAPI definitions
+    //apis: ['./routes/*.js'],
+    apis: ['app.js'],
+  };
+
+  const swaggerDocs = swaggerJsDoc(options);
+//const swaggerDocs = swaggerJsDoc(swaggerOption);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+/**
+ * @swagger
+ * /customers:
+ *  get:
+ *    description: Use to request all customers
+ *    responses:
+ *      '200':
+ *         description: A successful response
+ */
+
+app.get('/customers', (req, res) => {
+    res.status(200).json({message: 'Customers results'});
+})
 
 
 mongoose.connect(process.env.DB_CONNECTION)
